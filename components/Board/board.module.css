@@ -1,0 +1,338 @@
+/* ============================================
+   Tablero Kanban - Estilos de Componentes
+   ============================================ */
+
+.boardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  position: relative;
+}
+
+/* ============================================
+   Formulario de Nueva Tarea
+   ============================================ */
+
+.newTaskForm {
+  display: flex;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: var(--spacing-lg);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-family: var(--font-inter), sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg-card);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), var(--shadow-md);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.addButton {
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-outfit), sans-serif;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.addButton:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   Columnas
+   ============================================ */
+
+.column {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  width: 350px;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+  max-height: calc(100vh - 200px);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.column:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-primary);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--color-border-light);
+}
+
+.columnCount {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-secondary-light) 100%);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-width: 28px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.tasksList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 100px;
+  padding: var(--spacing-xs);
+  margin: calc(-1 * var(--spacing-xs));
+}
+
+/* ============================================
+   Tarjetas de Tareas
+   ============================================ */
+
+.taskCard {
+  background: var(--color-bg-card);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  touch-action: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.taskCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.taskCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--color-primary-light);
+}
+
+.taskCard:hover::before {
+  opacity: 1;
+}
+
+.taskCard:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  opacity: 0.5;
+  border: 2px dashed var(--color-primary);
+  background: var(--color-bg-column);
+  box-shadow: var(--shadow-xl);
+  transform: rotate(2deg);
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.taskTitle {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.taskDescription {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Controles de Tarea
+   ============================================ */
+
+.dragHandle {
+  color: var(--color-text-muted);
+  cursor: grab;
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+.dragHandle:hover {
+  color: var(--color-primary);
+}
+
+.deleteButton {
+  color: var(--color-danger);
+  cursor: pointer;
+  opacity: 0;
+  transition: all var(--transition-fast);
+  background: none;
+  border: none;
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(1.1);
+}
+
+.taskCard:hover .deleteButton {
+  opacity: 1;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+  .boardContainer {
+    padding: var(--spacing-md);
+  }
+
+  .column {
+    width: 300px;
+    min-width: 300px;
+  }
+
+  .newTaskForm {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .column {
+    width: 280px;
+    min-width: 280px;
+  }
+
+  .columnHeader {
+    font-size: 1rem;
+  }
+
+  .taskCard {
+    padding: var(--spacing-md);
+  }
+}
+
+/* ============================================
+   Animaciones de Entrada
+   ============================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .column {
+    animation: fadeInUp 0.4s ease-out backwards;
+  }
+
+  .column:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .column:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .column:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

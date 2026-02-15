@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📋 Mi Tablero Kanban
 
-## Getting Started
+Una aplicación simple para organizar tus tareas con el método Kanban. Crea, mueve y gestiona tus tareas fácilmente.
 
-First, run the development server:
+## 🚀 ¿Qué hace?
 
+- ✅ Crea tareas rápidamente
+- 🖱️ Arrastra tareas entre columnas (Por Hacer, En Progreso, Completado)
+- 💾 Guarda todo en base de datos PostgreSQL
+- 🔄 Se actualiza automáticamente
+
+## 🛠️ Tecnologías usadas
+
+- Next.js 16
+- React 19
+- TypeScript
+- PostgreSQL (Supabase)
+- Tailwind CSS
+- Drag & Drop con @dnd-kit
+
+## 📦 Instalación
+
+1. Clona el repo:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tu-usuario/tu-repo.git
+cd tu-repo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instala dependencias:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configura tu base de datos en `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Para desarrollo local:**
+```env
+DB_USER=postgres
+DB_PASSWORD=tu_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=next
+```
 
-## Learn More
+**Para Vercel/Supabase:**
+```env
+POSTGRES_URL=postgresql://postgres:PASSWORD@db.xxx.supabase.co:5432/postgres
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Crea la tabla en tu base de datos:
+```sql
+CREATE TABLE IF NOT EXISTS tasks (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT DEFAULT '',
+  status TEXT NOT NULL,
+  position INTEGER DEFAULT 0,
+  inserted_at TIMESTAMP DEFAULT NOW()
+);
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Ejecuta el proyecto:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Visita: http://localhost:3000
 
-## Deploy on Vercel
+## 🚀 Desplegar en Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Sube a GitHub
+2. Importa en [Vercel](https://vercel.com)
+3. Agrega la variable `POSTGRES_URL` en Settings > Environment Variables
+4. ¡Listo!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Estructura
+
+```
+app/
+  api/tasks/       # API para CRUD de tareas
+  page.tsx         # Página principal
+components/Board/  # Componentes del tablero
+lib/db.ts         # Conexión a base de datos
+store/            # Estado global con Zustand
+```
+
+## 👨‍💻 Autor
+
+Desarrollado por Ivan Zapata
+
+---
+
+Hecho con ❤️ y ☕
