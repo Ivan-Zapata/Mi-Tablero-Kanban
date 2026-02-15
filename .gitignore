@@ -126,3 +126,8 @@ next-env.d.ts
 *.pem
 *.cert
 *.key
+
+# ============================================
+# AGENTES Y CONFIGURACIONES LOCALES
+# ============================================
+.agents/
