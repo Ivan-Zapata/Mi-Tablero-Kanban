@@ -5,10 +5,11 @@ import { Task } from '../../../types';
 export async function GET() {
   try {
     const result = await query(
-      `SELECT id, title, description, status, position 
+      `SELECT id, title, description, status, position, inserted_at 
        FROM tasks 
        ORDER BY position ASC`
     );
+    console.log('DB returned:', result.rows?.length || 0, 'tasks');
     return NextResponse.json(result.rows || []);
   } catch (error: any) {
     console.error('API Error detailed:', error);

@@ -15,7 +15,12 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   fetchTasks: async () => {
     try {
       const res = await fetch('/api/tasks');
+      if (!res.ok) {
+        console.error('API error:', res.status, res.statusText);
+        return;
+      }
       const data = await res.json();
+      console.log('Fetched tasks:', data); // Debug
       if (Array.isArray(data)) {
         set({ tasks: data });
       }
